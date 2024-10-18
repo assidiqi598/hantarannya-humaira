@@ -1,0 +1,32 @@
+[
+  {
+    "type": "Crystal Tray",
+    "themes": [
+      {
+        "theme": "Violet"
+      },
+      {
+        "theme": "Navy Gold"
+      },
+      {
+        "theme": "Brown Nude"
+      }
+    ],
+    "maxTotal": 7
+  },
+  {
+    "type": "Hidden Box",
+    "themes": [
+      {
+        "theme": "Mauve White"
+      },
+      {
+        "theme": "Mauve White Series 2"
+      },
+      {
+        "theme": "Navy White"
+      }
+    ],
+    "maxTotal": 10
+  }
+]
