@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import Button from "@/components/button";
 import types from "@/data/types.json";
 import TextInput from "@/components/input/text";
@@ -76,9 +76,7 @@ ${additionalReq}`);
             <TextInput
               id="requester-name"
               value={name}
-              onChange={(e: {
-                target: { value: SetStateAction<string> };
-              }) => setName(e.target.value)}
+              onChange={(value: string) => setName(value)}
             />
             {type && !name && (
               <span className="ml-2 font-bold text-yellow-200">
@@ -94,10 +92,8 @@ ${additionalReq}`);
           <DateInput
             id="booking-date"
             value={bookingDate}
-            onChange={(e: {
-              target: { value: string };
-            }) => {
-              setBookingDate(new Date(e.target.value));
+            onChange={(value: string) => {
+              setBookingDate(new Date(value));
             }}
           />
         </div>

@@ -4,7 +4,7 @@ import cn from "classnames";
 interface IDateInput {
   id: string;
   value: Date;
-  onChange: Function;
+  onChange(value: string): void;
   additionalClassNames?: Array<string>;
 }
 
@@ -24,7 +24,7 @@ const DateInput: FC<IDateInput> = ({
         )}
         type="date"
         value={value.toLocaleDateString("af-ZA")}
-        onChange={(e) => onChange(e)}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );

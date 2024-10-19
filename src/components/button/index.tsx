@@ -3,6 +3,8 @@
 import { FC, ReactNode } from "react";
 import cn from "classnames";
 
+type condition = Record<string, boolean>;
+
 interface IButton extends React.PropsWithChildren {
   children: ReactNode;
   bgColor?: string;
@@ -10,8 +12,8 @@ interface IButton extends React.PropsWithChildren {
   width?: string;
   additionalClassNames?: Array<string>;
   id: string;
-  condition?: any;
-  onClick?: Function;
+  condition?: condition;
+  onClick?(): void;
 }
 
 const Button: FC<IButton> = ({

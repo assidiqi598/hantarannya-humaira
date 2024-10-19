@@ -23,7 +23,7 @@ export default function Home() {
         <h1
           className={`${styles["main-intro-title"]} text-4xl lg:text-6xl text-center`}
         >
-          "Hantaran" specially made for you
+          &ldquo;Hantaran&rdquo; specially made for you
         </h1>
         <p className="text-pink-600 my-5">
           by HANTARANNYA HUMAIRA

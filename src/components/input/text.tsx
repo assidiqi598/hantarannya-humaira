@@ -4,7 +4,7 @@ import cn from "classnames";
 interface ITextInput {
   id: string;
   value: string;
-  onChange: Function;
+  onChange(value: string): void;
   additionalClassNames?: Array<string>;
 }
 
@@ -23,7 +23,7 @@ const TextInput: FC<ITextInput> = ({
         additionalClassNames
       )}
       type="text"
-      onChange={(e) => onChange(e)}
+      onChange={(e) => onChange(e.target.value)}
     />
   );
 };
