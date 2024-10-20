@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 
 interface ISelect {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   items?: Array<any>;
   propKey?: string;
   value?: string;
