@@ -19,7 +19,7 @@ const DateInput: FC<IDateInput> = ({
       <input
         id={`${id}`}
         className={cn(
-          "p-2 text-pink-600 rounded-xl focus:outline-none",
+          "p-2 text-pink-600 rounded-xl focus:outline-none cursor-pointer",
           additionalClassNames
         )}
         type="date"

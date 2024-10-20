@@ -65,6 +65,7 @@ const config: Config = {
       transitionDelay: {
         "0": "0ms",
         "400": "400ms",
+        "600": "600ms",
         "800": "800ms",
         "1200": "1200ms",
         "1600": "1600ms",
@@ -87,7 +88,7 @@ const config: Config = {
       },
       backgroundImage: {
         "main-bg-horizontal":
-          "linear-gradient(to bottom,rgba(0,0,0,0),rgba(255,255,255,100)),url('/assets/main-bg-horizontal.webp')",
+          "url('/assets/main-bg-horizontal.webp')",
         "main-bg-vertical":
           "linear-gradient(to bottom,rgba(0,0,0,0),rgba(255,255,255,100)),url('/assets/main-bg-vertical.webp')",
       },

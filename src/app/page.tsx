@@ -2,26 +2,23 @@ import Button from "@/components/button";
 import Link from "next/link";
 import styles from "./app.module.css";
 import Image from "next/image";
+import alt from "@/data/alt";
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col items-center justify-center h-svh w-svw lg:w-full lg:max-h-screen">
-      <div
-        className={`absolute left-0 right-0 mx-auto flex flex-col ${styles["hantaran-hidden"]}`}
-      >
-        <Image
-          src="/assets/hantaran-hidden.webp"
-          alt="hantaran-seserahan-purwokerto-banyumas-cilacap-purbalingga-hidden"
-          width={410}
-          height={384}
-          priority={true}
-        />
-      </div>
-      <div
-        className={`flex flex-col items-center justify-end p-3 w-full lg:w-1/2 lg:px-0 absolute left-0 right-0 mx-auto ${styles["intro-div"]}`}
-      >
+    <div className="relative flex flex-col items-center justify-center h-svh w-svw">
+      <Image
+        src="/assets/hantaran-hidden.webp"
+        alt={`${alt}-hidden`}
+        width={820}
+        height={768}
+        priority={true}
+        className="w-2/3 md:w-5/12 lg:w-1/5 mt-[5rem] opacity-0 animate-fadeup"
+      />
+
+      <div className="flex flex-col items-center justify-end p-3 w-full lg:w-1/2 lg:px-0 opacity-0 animate-fadeup animation-delay-600">
         <h1
-          className={`${styles["main-intro-title"]} text-4xl lg:text-6xl text-center`}
+          className={`${styles["main-intro-title"]} text-4xl lg:text-5xl text-center`}
         >
           &ldquo;Hantaran&rdquo; specially made for you
         </h1>
@@ -33,7 +30,7 @@ export default function Home() {
             <Button
               id="main-intro-go-to-choosing-btn"
               bgColor="bg-pink-600"
-              width="w-40"
+              width="w-[9.13rem]"
             >
               Book now{" "}
               <svg
@@ -58,7 +55,7 @@ export default function Home() {
               id="main-intro-go-to-gallery-btn"
               bgColor="bg-pink-200"
               textColor="text-black-400"
-              width="w-40"
+              width="w-[9.13rem]"
               additionalClassNames={[
                 "mt-2",
                 "border-pink-600",

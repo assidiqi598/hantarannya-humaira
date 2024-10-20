@@ -18,7 +18,7 @@ const Header: FC<IHeader> = ({ info }) => {
           className="m-1 h-10 w-10"
           width={512}
           height={512}
-          loading="lazy"
+          priority={true}
         />
       </a>
 

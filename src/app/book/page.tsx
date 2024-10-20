@@ -5,17 +5,10 @@ import Button from "@/components/button";
 import types from "@/data/types.json";
 import TextInput from "@/components/input/text";
 import DateInput from "@/components/input/date";
+import Select from "@/components/select";
 import Link from "next/link";
-
-interface ITheme {
-  theme: string;
-}
-
-interface IType {
-  type: string;
-  themes: Array<ITheme>;
-  maxTotal: number;
-}
+import ITheme from "@/interfaces/theme";
+import IType from "@/interfaces/types";
 
 export default function MainChoosing() {
   const [type, setType] = useState<IType>();
@@ -43,7 +36,9 @@ export default function MainChoosing() {
 Saya ingin booking hantaran dengan rincian sebagai berikut.
         
 Booking atas nama: ${name}
-Untuk tanggal: ${bookingDate.toLocaleDateString("id-ID")}
+Untuk tanggal: ${bookingDate.toLocaleDateString("id-ID", {
+        dateStyle: "full",
+      })}
 Tipe: ${type?.type ?? ""}
 Tema: ${theme?.theme ?? ""}
 Total Hantaran: ${totalBox ?? ""}
@@ -102,30 +97,19 @@ ${additionalReq}`);
             Pilih tipe hantaran
           </h3>
           <div className="flex items-center justify-start w-full">
-            {types.map((it) => (
-              <Button
-                key={`${it.type}`}
-                id={`btn-choosing-${it.type}`}
-                additionalClassNames={["mr-2"]}
-                bgColor={
-                  type?.type === it.type
-                    ? "bg-pink-200"
-                    : undefined
-                }
-                textColor={
-                  type?.type === it.type
-                    ? "text-black-400"
-                    : undefined
-                }
-                onClick={() => {
-                  setType(it);
-                  setTotalBox(it.maxTotal);
-                  setTheme(undefined);
-                }}
-              >
-                {it.type}
-              </Button>
-            ))}
+            <Select
+              items={types}
+              propKey="type"
+              value={type?.type}
+              onChange={(value) => {
+                const typeIdx = types.findIndex(
+                  (it) => it.type === value
+                );
+                setType(types[typeIdx]);
+                setTotalBox(types[typeIdx].maxTotal);
+                setTheme(undefined);
+              }}
+            />
           </div>
         </div>
         {type && name && (
@@ -134,35 +118,24 @@ ${additionalReq}`);
               Pilih tema hantaran
             </h3>
             <div className="flex items-center justify-start w-full">
-              {type?.themes.map((it) => (
-                <Button
-                  key={`${it.theme}`}
-                  id={`btn-choosing-${it.theme}`}
-                  additionalClassNames={["mr-2"]}
-                  bgColor={
-                    theme?.theme === it.theme
-                      ? "bg-pink-200"
-                      : undefined
-                  }
-                  textColor={
-                    theme?.theme === it.theme
-                      ? "text-black-400"
-                      : undefined
-                  }
-                  onClick={() => {
-                    setTheme(it);
-                    setTimeout(() => {
-                      window.scroll({
-                        top: 200,
-                        left: 0,
-                        behavior: "smooth",
-                      });
-                    }, 600);
-                  }}
-                >
-                  {it.theme}
-                </Button>
-              ))}
+              <Select
+                items={type.themes}
+                propKey="theme"
+                value={theme?.theme}
+                onChange={(value) => {
+                  const themeIdx = type.themes.findIndex(
+                    (it) => it.theme === value
+                  );
+                  setTheme(type.themes[themeIdx]);
+                  setTimeout(() => {
+                    window.scroll({
+                      top: 200,
+                      left: 0,
+                      behavior: "smooth",
+                    });
+                  }, 400);
+                }}
+              />
             </div>
           </div>
         )}
@@ -176,7 +149,7 @@ ${additionalReq}`);
                 <h3 className="text-white">
                   Total hantaran
                 </h3>
-                <div className="flex items-center justify-center rounded-lg bg-white">
+                <div className="flex items-center justify-center rounded-lg bg-white w-fit">
                   <span className="p-3 text-lg font-bold">
                     {totalBox}
                   </span>
