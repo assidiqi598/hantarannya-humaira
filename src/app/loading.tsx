@@ -6,7 +6,7 @@ export default function Loading() {
   return (
     <div className="w-svw h-svh flex justify-center items-center">
       <Image
-        src="/assets/heart-loading.gif"
+        src="/assets/spinner.gif"
         width={100}
         height={100}
         alt={`loading-heart-for-${alt}`}

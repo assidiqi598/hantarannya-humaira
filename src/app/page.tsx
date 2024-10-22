@@ -6,7 +6,7 @@ import alt from "@/data/alt";
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col items-center justify-center h-svh w-svw">
+    <div className="relative flex flex-col items-center justify-center h-svh w-svw portrait:bg-main-bg-vertical bg-no-repeat bg-cover landscape:bg-main-bg-horizontal">
       <Image
         src="/assets/hantaran-hidden.webp"
         alt={`${alt}-hidden`}
@@ -47,10 +47,7 @@ export default function Home() {
               </svg>
             </Button>
           </Link>
-          <Link
-            href="https://www.instagram.com/hantarannya_humaira/"
-            target="_blank"
-          >
+          <Link href="/gallery">
             <Button
               id="main-intro-go-to-gallery-btn"
               bgColor="bg-pink-200"
