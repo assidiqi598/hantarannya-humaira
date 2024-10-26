@@ -3,18 +3,16 @@ import Type from "./components/type";
 
 export default function Gallery() {
   return (
-    <div className="w-svw h-svh mt-6 p-3 portrait:bg-main-bg-vertical bg-no-repeat bg-cover landscape:bg-main-bg-horizontal animate-fadeup">
-      <div className="overflow-y-auto">
-        <h1>Gallery</h1>
-        {types.map((type) => (
-          <Type
-            key={type.type}
-            type={type.type}
-            themes={type.themes}
-            maxTotal={type.maxTotal}
-          />
-        ))}
-      </div>
+    <div className="overflow-hidden mt-6 m-3 lg:m-8 animate-fadeup">
+      <h1>Gallery</h1>
+      {types.map((type) => (
+        <Type
+          key={type.type}
+          type={type.type}
+          themes={type.themes}
+          maxTotal={type.maxTotal}
+        />
+      ))}
     </div>
   );
 }

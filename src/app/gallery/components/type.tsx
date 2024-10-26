@@ -19,21 +19,27 @@ const Type: FC<IType> = ({ type, themes }) => {
     });
     observer.observe(typeRef.current as Element);
 
-    return () =>
-      observer.unobserve(typeRef.current as Element);
+    return () => {
+      if (typeRef.current)
+        observer.unobserve(typeRef.current as Element);
+    };
   }, []);
 
   return (
     <div
       ref={typeRef}
-      className={cn("flex flex-col opacity-0 mb-8", {
-        "animate-fadeup": isVisible,
-      })}
+      className={cn(
+        "flex flex-col opacity-0 w-fit h-fit mb-8",
+        {
+          "animate-fadeup": isVisible,
+        }
+      )}
     >
       <h2>Tipe: {type}</h2>
       {themes.map((theme) => (
         <Theme
           key={theme.theme}
+          type={type}
           theme={theme.theme}
           images={theme.images}
         />

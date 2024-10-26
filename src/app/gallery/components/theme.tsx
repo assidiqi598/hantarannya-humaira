@@ -5,7 +5,15 @@ import { FC, useEffect, useRef, useState } from "react";
 import cn from "classnames";
 import Item from "./item";
 
-const Theme: FC<ITheme> = ({ theme, images }) => {
+interface IThemeComponent extends ITheme {
+  type: string;
+}
+
+const Theme: FC<IThemeComponent> = ({
+  type,
+  theme,
+  images,
+}) => {
   const [isVisible, setIsVisible] =
     useState<boolean>(false);
   const themeRef = useRef<HTMLDivElement>(null);
@@ -19,8 +27,10 @@ const Theme: FC<ITheme> = ({ theme, images }) => {
     });
     observer.observe(themeRef.current as Element);
 
-    return () =>
-      observer.unobserve(themeRef.current as Element);
+    return () => {
+      if (themeRef.current)
+        observer.unobserve(themeRef.current as Element);
+    };
   }, []);
 
   return (
@@ -34,7 +44,14 @@ const Theme: FC<ITheme> = ({ theme, images }) => {
       <h3>Tema: {theme}</h3>
       <div className="flex flex-wrap">
         {images.map((image) => (
-          <Item key={image.image} image={image.image} />
+          <Item
+            key={image.image}
+            type={type}
+            theme={theme}
+            image={image.image}
+            desc={image.desc}
+            link={image.link}
+          />
         ))}
       </div>
     </div>
