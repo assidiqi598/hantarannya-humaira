@@ -2,10 +2,11 @@
 
 import { FC, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import cn from "classnames";
 import IImages from "@/interfaces/images";
 import alt from "@/data/alt";
-import Link from "next/link";
+import { customEncodeURI } from "@/util/encode";
 
 interface IItem extends IImages {
   type: string;
@@ -45,22 +46,9 @@ const Item: FC<IItem> = ({
     setLoading(false);
   };
 
-  const prepareEncode = (str: string = ""): string => {
-    return str
-      .replace(/\//g, "sl4sh")
-      .replace(/_/g, "und325c023")
-      .replace(/:/g, "c0L0n");
-  };
-
   return (
     <Link
-      href={`/gallery/img/${encodeURI(
-        `${type}_${theme}_${image}_${prepareEncode(
-          desc
-        )}_${prepareEncode(link?.target)}_${prepareEncode(
-          link?.href
-        )}`
-      )}`}
+      href={`/gallery/img/${customEncodeURI(type, theme, image, desc, link?.target, link?.href)}`}
       scroll={false}
       className={cn(
         "relative opacity-0 w-1/4 md:w-1/5 lg:w-1/12 h-1/4 md:h-1/5 lg:h-1/12 mr-2 mb-2 rounded-lg border-2 border-pink-600",

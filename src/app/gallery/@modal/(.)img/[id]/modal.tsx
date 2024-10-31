@@ -24,7 +24,7 @@ export function Modal({
   }
 
   return createPortal(
-    <div className="absolute top-0 right-0 bottom-0 left-0 bg-black-400/50">
+    <div className="absolute min-h-[50%] min-w-[20%] top-0 right-0 bottom-0 left-0 bg-black-400/50">
       <dialog
         ref={dialogRef}
         className="relative rounded-lg"

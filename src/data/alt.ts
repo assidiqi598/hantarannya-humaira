@@ -1,4 +1,4 @@
 const alt: string =
-  "seserahan-hantaran-purwokerto-banyumas-cilacap-purbalingga";
+  "seserahan hantaran purwokerto banyumas cilacap purbalingga";
 
 export default alt;
