@@ -4,7 +4,7 @@ import { customEncodeURI } from "@/util/encode";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const BASE_URL = "https://humaira.biz.id";
-  const images = [];
+  const images: MetadataRoute.Sitemap = [];
 
   types.forEach((type) => {
     type.themes.forEach((theme) => {
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             image.link?.target,
             image.link?.href
           )}`,
-          prioriy: 0.7
+          priority: 0.7
         });
       });
     });
@@ -43,5 +43,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    ...images
   ];
 }
