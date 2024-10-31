@@ -10,8 +10,8 @@ export default function Home() {
       <Image
         src="/assets/hantaran-hidden.webp"
         alt={`${alt}-hidden`}
-        width={820}
-        height={768}
+        width={410}
+        height={450}
         priority={true}
         className="w-2/3 md:w-5/12 lg:w-1/5 mt-[5rem] opacity-0 animate-fadeup"
       />

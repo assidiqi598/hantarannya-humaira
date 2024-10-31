@@ -17,11 +17,13 @@ const Type: FC<IType> = ({ type, themes }) => {
           setIsVisible(entry.isIntersecting);
       });
     });
-    observer.observe(typeRef.current as Element);
+
+    const ref = typeRef.current;
+
+    observer.observe(ref as Element);
 
     return () => {
-      if (typeRef.current)
-        observer.unobserve(typeRef.current as Element);
+      if (ref) observer.unobserve(ref as Element);
     };
   }, []);
 

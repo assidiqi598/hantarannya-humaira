@@ -31,11 +31,13 @@ const Item: FC<IItem> = ({
           setIsVisible(entry.isIntersecting);
       });
     });
-    observer.observe(imgRef.current as Element);
+
+    const ref = imgRef.current;
+
+    observer.observe(ref as Element);
 
     return () => {
-      if (imgRef.current)
-        observer.unobserve(imgRef.current as Element);
+      if (ref) observer.unobserve(ref as Element);
     };
   }, []);
 
@@ -47,11 +49,25 @@ const Item: FC<IItem> = ({
     return str
       .replace(/\//g, "sl4sh")
       .replace(/_/g, "und325c023")
-      .replace(/:/g, "c0L0n")
+      .replace(/:/g, "c0L0n");
   };
 
   return (
-    <>
+    <Link
+      href={`/gallery/img/${encodeURI(
+        `${type}_${theme}_${image}_${prepareEncode(
+          desc
+        )}_${prepareEncode(link?.target)}_${prepareEncode(
+          link?.href
+        )}`
+      )}`}
+      className={cn(
+        "relative opacity-0 w-1/4 md:w-1/5 lg:w-1/12 h-1/4 md:h-1/5 lg:h-1/12 mr-2 mb-2 rounded-lg border-2 border-pink-600",
+        {
+          "animate-fadeup": isVisible,
+        }
+      )}
+    >
       {loading && (
         <Image
           ref={imgRef}
@@ -59,42 +75,20 @@ const Item: FC<IItem> = ({
           alt={`${alt}-spinner`}
           width={50}
           height={50}
-          className={cn(
-            "opacity-0 w-1/4 md:w-1/5 lg:w-1/12 h-auto mr-2 mb-2 rounded-lg border border-pink-600",
-            {
-              "animate-fadeup": isVisible,
-            }
-          )}
+          unoptimized
+          className="absolute top-0 right-0 bottom-0 left-0 m-auto"
         />
       )}
-
-      <Link
-        href={`/gallery/img/${encodeURI(
-          `${type}_${theme}_${image}_${prepareEncode(
-            desc
-          )}_${prepareEncode(link?.target)}_${prepareEncode(
-            link?.href
-          )}`
-        )}`}
-        className={cn(
-          "opacity-0 w-1/4 md:w-1/5 lg:w-1/12 h-auto mr-2 mb-2 rounded-lg border-2 border-pink-600",
-          {
-            "animate-fadeup": isVisible,
-          }
-        )}
-      >
-        <Image
-          ref={imgRef}
-          src={`/gallery/IMG_${image}.webp`}
-          alt={`${alt}-${image}`}
-          width={500}
-          height={500}
-          quality={100}
-          onLoad={onImgLoad}
-          className="w-full h-full rounded-lg"
-        />
-      </Link>
-    </>
+      <Image
+        ref={imgRef}
+        src={`/gallery/IMG_${image}.webp`}
+        alt={`${alt}-${image}`}
+        width={200}
+        height={200}
+        onLoad={onImgLoad}
+        className="w-full h-full rounded-lg"
+      />
+    </Link>
   );
 };
 

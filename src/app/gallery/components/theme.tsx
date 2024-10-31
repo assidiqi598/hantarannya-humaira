@@ -25,11 +25,13 @@ const Theme: FC<IThemeComponent> = ({
           setIsVisible(entry.isIntersecting);
       });
     });
-    observer.observe(themeRef.current as Element);
+
+    const ref = themeRef.current;
+
+    observer.observe(ref as Element);
 
     return () => {
-      if (themeRef.current)
-        observer.unobserve(themeRef.current as Element);
+      if (ref) observer.unobserve(ref as Element);
     };
   }, []);
 
@@ -42,7 +44,7 @@ const Theme: FC<IThemeComponent> = ({
       })}
     >
       <h3>Tema: {theme}</h3>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap items-center">
         {images.map((image) => (
           <Item
             key={image.image}

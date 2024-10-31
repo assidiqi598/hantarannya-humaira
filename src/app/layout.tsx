@@ -32,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
+        <Header info="10% off until December 2024" />
         {children}
         <WhatsApp />
       </body>
