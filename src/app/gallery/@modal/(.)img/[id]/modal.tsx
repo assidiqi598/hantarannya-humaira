@@ -27,7 +27,7 @@ export function Modal({
     <div className="absolute top-0 right-0 bottom-0 left-0 bg-black-400/50">
       <dialog
         ref={dialogRef}
-        className="rounded-lg landscape:overflow-y-hidden"
+        className="relative rounded-lg"
         onClose={onDismiss}
       >
         <svg
@@ -35,7 +35,7 @@ export function Modal({
           width="32"
           height="32"
           fill="#212121"
-          className="bi bi-x-circle mt-3 mr-3 ml-auto font-bold cursor-pointer portrait:hidden"
+          className="bi bi-x-circle sticky top-3 right-3 ml-auto font-bold cursor-pointer portrait:hidden"
           viewBox="0 0 16 16"
           onClick={onDismiss}
         >

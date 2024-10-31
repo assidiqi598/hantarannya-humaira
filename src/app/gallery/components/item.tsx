@@ -61,6 +61,7 @@ const Item: FC<IItem> = ({
           link?.href
         )}`
       )}`}
+      scroll={false}
       className={cn(
         "relative opacity-0 w-1/4 md:w-1/5 lg:w-1/12 h-1/4 md:h-1/5 lg:h-1/12 mr-2 mb-2 rounded-lg border-2 border-pink-600",
         {
