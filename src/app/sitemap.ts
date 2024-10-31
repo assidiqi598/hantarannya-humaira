@@ -4,7 +4,7 @@ import { customEncodeURI } from "@/util/encode";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const BASE_URL = "https://humaira.biz.id";
-  let images = [];
+  const images = [];
 
   types.forEach((type) => {
     type.themes.forEach((theme) => {
