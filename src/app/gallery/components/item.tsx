@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import cn from "classnames";
 import IImages from "@/interfaces/images";
-import alt from "@/data/alt";
+import alt from "@/data/alt.json";
 import { customEncodeURI } from "@/util/encode";
 
 interface IItem extends IImages {
@@ -61,7 +61,7 @@ const Item: FC<IItem> = ({
         <Image
           ref={imgRef}
           src={"/assets/spinner.gif"}
-          alt={`${alt}-spinner`}
+          alt={`${alt.mainAlt}-spinner`}
           width={50}
           height={50}
           unoptimized
@@ -71,7 +71,7 @@ const Item: FC<IItem> = ({
       <Image
         ref={imgRef}
         src={`/gallery/IMG_${image}.webp`}
-        alt={`${alt}-${image}`}
+        alt={`${alt.mainAlt}-${image}`}
         width={200}
         height={200}
         onLoad={onImgLoad}

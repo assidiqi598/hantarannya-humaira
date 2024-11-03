@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./whatsapp.css";
-import alt from "@/data/alt";
+import alt from "@/data/alt.json";
 
 export default function WhatsApp() {
   return (
@@ -12,7 +12,7 @@ export default function WhatsApp() {
     >
       <Image
         src="/assets/whatsapp.svg"
-        alt={`${alt}-whatsapp`}
+        alt={`${alt.mainAlt}-whatsapp`}
         width={50}
         height={50}
         priority={false}

@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { ReactNode, useState } from "react";
 import cn from "classnames";
 import Button from "@/components/button";
-import alt from "@/data/alt";
+import alt from "@/data/alt.json";
 
 interface IImgPage {
   isModal?: boolean;
@@ -75,7 +75,7 @@ export default function ImgPage({
         {loading && (
           <Image
             src={"/assets/spinner.gif"}
-            alt={`${alt}-spinner`}
+            alt={`${alt.mainAlt}-spinner`}
             width={50}
             height={50}
             unoptimized
@@ -84,7 +84,7 @@ export default function ImgPage({
         )}
         <Image
           src={`/gallery/IMG_${img}.webp`}
-          alt={`${alt}-${type}-${theme}`}
+          alt={`${alt.mainAlt}-${type}-${theme}`}
           width={500}
           height={500}
           priority={true}
