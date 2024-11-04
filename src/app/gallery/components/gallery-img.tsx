@@ -89,12 +89,7 @@ export default function ImgPage({
           height={500}
           priority={true}
           onLoad={onImgLoad}
-          className={cn(
-            "landscape:h-5/6 portrait:h-4/6 w-auto rounded-lg border-2 border-pink-600",
-            {
-              "opacity-0": loading,
-            }
-          )}
+          className={"landscape:h-5/6 portrait:h-4/6 w-auto rounded-lg border-2 border-pink-600"}
         />
       </div>
       {!loading && (
