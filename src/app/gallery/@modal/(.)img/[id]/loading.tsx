@@ -4,7 +4,7 @@ import alt from "@/data/alt.json";
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
   return (
-    <div className="w-svw h-svh flex justify-center items-center bg-white">
+    <div className="w-svw h-svh flex justify-center items-center">
       <Image
         src="/assets/spinner.gif"
         width={100}

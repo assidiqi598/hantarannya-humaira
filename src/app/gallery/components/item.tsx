@@ -22,8 +22,8 @@ const Item: FC<IItem> = ({
 }) => {
   const [isVisible, setIsVisible] =
     useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
-  const imgRef = useRef<HTMLImageElement>(null);
+  // const [loading, setLoading] = useState<boolean>(true);
+  const linkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -33,7 +33,7 @@ const Item: FC<IItem> = ({
       });
     });
 
-    const ref = imgRef.current;
+    const ref = linkRef.current;
 
     observer.observe(ref as Element);
 
@@ -42,25 +42,28 @@ const Item: FC<IItem> = ({
     };
   }, []);
 
-  const onImgLoad = () => {
-    setLoading(false);
-  };
-
   return (
     <Link
-      href={`/gallery/img/${customEncodeURI(type, theme, image, desc, link?.target, link?.href)}`}
+      ref={linkRef}
+      href={`/gallery/img/${customEncodeURI(
+        type,
+        theme,
+        image,
+        desc,
+        link?.target,
+        link?.href
+      )}`}
       scroll={false}
       className={cn(
-        "relative w-1/4 md:w-1/5 lg:w-1/12 h-1/4 md:h-1/5 lg:h-1/12 mr-2 mb-2 rounded-lg border-2 border-pink-600",
+        "w-1/4 md:w-1/5 lg:w-1/12 h-1/4 md:h-1/5 lg:h-1/12 mr-2 mb-2 rounded-lg border-2 border-pink-600",
         {
           "animate-fadeup": isVisible,
-          "opacity-0": !isVisible
+          "opacity-0": !isVisible,
         }
       )}
     >
-      {loading && (
+      {/* {loading && (
         <Image
-          ref={imgRef}
           src={"/assets/spinner.gif"}
           alt={`${alt.mainAlt}-spinner`}
           width={50}
@@ -68,14 +71,15 @@ const Item: FC<IItem> = ({
           unoptimized
           className="absolute top-0 right-0 bottom-0 left-0 m-auto"
         />
-      )}
+      )} */}
+      {/* with the use of onLoad, some images sometimes loaded but not showing up */}
       <Image
-        ref={imgRef}
         src={`/gallery/IMG_${image}.webp`}
         alt={`${alt.mainAlt}-${image}`}
         width={200}
         height={200}
-        onLoad={onImgLoad}
+        // onLoad={() => setLoading(false)}
+        // onLoadingComplete={() => setLoading(false)}
         className="w-full h-full rounded-lg"
       />
     </Link>

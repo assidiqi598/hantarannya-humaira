@@ -62,7 +62,7 @@ ${additionalReq}`);
   return (
     <div
       id="main-choosing"
-      className="flex items-start justify-center min-h-svh p-4 portrait:bg-main-bg-vertical bg-no-repeat bg-cover landscape:bg-main-bg-horizontal"
+      className="flex items-start justify-center min-h-svh p-4 portrait:bg-main-bg-vertical bg-no-repeat bg-cover landscape:bg-clouds"
     >
       <div className="flex flex-col items-start justify-center rounded-xl bg-pink-600/95 p-2 mt-10 w-full lg:w-1/2 opacity-0 animate-fadeup">
         <div className="opacity-0 animate-fadeup animation-delay-400">
