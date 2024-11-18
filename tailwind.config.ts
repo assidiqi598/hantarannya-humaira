@@ -91,6 +91,8 @@ const config: Config = {
           "url('/assets/main-bg-horizontal.webp')",
         "main-bg-vertical":
           "linear-gradient(to bottom,rgba(0,0,0,0),rgba(255,255,255,100)),url('/assets/main-bg-vertical.webp')",
+        "clouds":
+          "linear-gradient(to bottom,rgba(0,0,0,0),rgba(255,255,255,100)),url('/assets/clouds.webp')",
       },
     },
   },

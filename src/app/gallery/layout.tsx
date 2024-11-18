@@ -6,7 +6,7 @@ export default function GalleryLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <div className="w-svw h-svh overflow-x-hidden bg-main-bg-vertical bg-no-repeat bg-cover">
+    <div className="w-svw h-svh overflow-x-hidden landscape:bg-clouds portrait:bg-main-bg-vertical bg-no-repeat bg-cover">
       {children}
       {modal}
       <div id="gallery-img" />

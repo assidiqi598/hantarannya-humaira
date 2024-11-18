@@ -2,20 +2,19 @@ import Button from "@/components/button";
 import Link from "next/link";
 import styles from "./app.module.css";
 import Image from "next/image";
-import alt from "@/data/alt";
+import alt from "@/data/alt.json";
 
 export default function Home() {
   return (
     <div className="relative flex flex-col items-center justify-center h-svh w-svw portrait:bg-main-bg-vertical bg-no-repeat bg-cover landscape:bg-main-bg-horizontal">
       <Image
         src="/assets/hantaran-hidden.webp"
-        alt={`${alt}-hidden`}
+        alt={`${alt.mainAlt}-hidden`}
         width={410}
         height={450}
         priority={true}
         className="w-2/3 md:w-5/12 lg:w-1/5 mt-[5rem] opacity-0 animate-fadeup"
       />
-
       <div className="flex flex-col items-center justify-end p-3 w-full lg:w-1/2 lg:px-0 opacity-0 animate-fadeup animation-delay-600">
         <h1
           className={`${styles["main-intro-title"]} text-4xl lg:text-5xl text-center`}
