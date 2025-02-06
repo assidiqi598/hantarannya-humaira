@@ -1,18 +1,32 @@
 import types from "@/data/types.json";
 import Type from "./components/type";
+import { FC } from "react";
+import { cookies, headers } from "next/headers";
 
-export default function Gallery() {
+const Gallery: FC = () => {
+  const headersList = headers();
+  const host = headersList.get("host");
+  const protocol =
+    headersList.get("x-forwarded-proto") || "http";
+  const pathname =
+    cookies().get("currentPath")?.value || "/";
+
+  const fullUrl = `${protocol}://${host}${pathname}`;
+
   return (
-    <div className="overflow-hidden mt-6 m-3 lg:m-8 animate-fadeup">
-      <h1>Gallery</h1>
-      {types.map((type) => (
+    <div className="overflow-hidden flex portrait:flex-col justify-start items-center m-3 lg:m-8 animate-fadeup">
+      {types.map((type, idx) => (
         <Type
           key={type.type}
+          idx={idx}
           type={type.type}
           themes={type.themes}
           maxTotal={type.maxTotal}
+          fullUrl={fullUrl}
         />
       ))}
     </div>
   );
-}
+};
+
+export default Gallery;

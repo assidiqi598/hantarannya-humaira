@@ -31,6 +31,9 @@ const config: Config = {
       red: " #FF0000",
       pink: {
         200: "#ffeff4",
+        300: "#E2BDC7",
+        400: "#C89BA9",
+        500: "#A77988",
         600: "#8C5C6A",
       },
       indigo: {

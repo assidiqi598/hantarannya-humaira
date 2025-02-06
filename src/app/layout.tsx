@@ -17,9 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={'antialiased'}
-      >
+      <body className={"antialiased"}>
         {/* <Header info="10% off until December 2024" /> */}
         {children}
         <WhatsApp />

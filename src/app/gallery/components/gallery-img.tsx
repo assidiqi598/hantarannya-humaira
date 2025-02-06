@@ -59,7 +59,7 @@ export default function ImgPage({
       className={cn(
         "p-2 lg:px-16 overflow-y-auto flex portrait:flex-col portrait:justify-center portrait:items-start",
         {
-          "portrait:pt-14 min-h-svh": !isModal,
+          "min-h-svh": !isModal,
         }
       )}
     >
@@ -124,11 +124,11 @@ export default function ImgPage({
           )}
           {!isModal && (
             <Link
-              href="/gallery"
+              href={`/gallery/${encodeURIComponent(type)}`}
               className="inline-block mt-6"
             >
               <Button id="back-to-gallery">
-                Back to gallery
+                Back
               </Button>
             </Link>
           )}

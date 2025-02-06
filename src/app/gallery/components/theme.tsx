@@ -43,7 +43,7 @@ const Theme: FC<IThemeComponent> = ({
         "animate-fadeup": isVisible,
       })}
     >
-      <h3>Tema: {theme}</h3>
+      <h3>{theme}</h3>
       <div className="flex flex-wrap items-center">
         {images.map((image) => (
           <Item

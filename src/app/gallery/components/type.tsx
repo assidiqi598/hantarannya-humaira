@@ -1,52 +1,41 @@
-"use client";
-
-import { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import cn from "classnames";
+import Image from "next/image";
 import IType from "@/interfaces/types";
 import Theme from "./theme";
+import alt from "@/data/alt.json";
+import Link from "next/link";
 
-const Type: FC<IType> = ({ type, themes }) => {
-  const [isVisible, setIsVisible] =
-    useState<boolean>(false);
-  const typeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting)
-          setIsVisible(entry.isIntersecting);
-      });
-    });
-
-    const ref = typeRef.current;
-
-    observer.observe(ref as Element);
-
-    return () => {
-      if (ref) observer.unobserve(ref as Element);
-    };
-  }, []);
-
+const Type: FC<
+  IType & { fullUrl?: string; idx: number }
+> = ({ type, idx, themes, fullUrl }) => {
   return (
-    <div
-      ref={typeRef}
+    <Link
       className={cn(
-        "flex flex-col opacity-0 w-fit h-fit mb-8",
+        "flex flex-col opacity-0 w-fit h-fit m-4 rounded-xl border px-10 pb-6 animate-fadeup",
         {
-          "animate-fadeup": isVisible,
+          "bg-pink-600 border-pink-300":
+            type === "Hidden Box",
+          "bg-pink-300 border-pink-600":
+            type === "Crystal Tray",
+          "text-white": type === "Hidden Box",
+          [`animation-delay-${idx * 800}`]: idx > 0,
         }
       )}
+      href={`${fullUrl}/${encodeURIComponent(type)}`}
     >
-      <h2>Tipe: {type}</h2>
-      {themes.map((theme) => (
-        <Theme
-          key={theme.theme}
-          type={type}
-          theme={theme.theme}
-          images={theme.images}
-        />
-      ))}
-    </div>
+      <div className="flex justify-between items-center">
+        <h2>{type}</h2>
+      </div>
+
+      <Image
+        className="rounded-xl"
+        src={`/gallery/IMG_${themes[0].images[0].image}.webp`}
+        alt={`${alt.mainAlt}-${type}`}
+        width={200}
+        height={200}
+      />
+    </Link>
   );
 };
 
