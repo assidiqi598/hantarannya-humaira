@@ -6,7 +6,7 @@ export default function GalleryLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <div className="w-svw h-svh overflow-x-hidden">
+    <div className="landscape:w-full">
       {children}
       {modal}
       <div id="gallery-img" />

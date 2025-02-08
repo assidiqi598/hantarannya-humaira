@@ -14,7 +14,7 @@ const Gallery: FC = () => {
   const fullUrl = `${protocol}://${host}${pathname}`;
 
   return (
-    <div className="overflow-hidden flex portrait:flex-col justify-start items-center m-3 lg:m-8 animate-fadeup">
+    <div className="landscape:min-h-svh overflow-hidden flex portrait:flex-col justify-start landscape:justify-center items-center m-3 lg:m-8 animate-fadeup">
       {types.map((type, idx) => (
         <Type
           key={type.type}

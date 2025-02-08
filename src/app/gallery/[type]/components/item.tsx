@@ -55,7 +55,7 @@ const Item: FC<IItem> = ({
       )}`}
       scroll={false}
       className={cn(
-        "w-1/4 md:w-1/5 lg:w-1/12 h-1/4 md:h-1/5 lg:h-1/12 mr-2 mb-2 rounded-lg border-2 border-pink-600",
+        "portrait:w-1/4 mr-2 mb-2 rounded-lg border-2 border-pink-600",
         // {
         //   "animate-fadeup": isVisible,
         //   "opacity-0": !isVisible,
@@ -76,8 +76,8 @@ const Item: FC<IItem> = ({
       <Image
         src={`/gallery/IMG_${image}.webp`}
         alt={`${alt.mainAlt}-${image}`}
-        width={200}
-        height={200}
+        width={100}
+        height={100}
         // onLoad={() => setLoading(false)}
         // onLoadingComplete={() => setLoading(false)}
         className="w-full h-full rounded-lg"

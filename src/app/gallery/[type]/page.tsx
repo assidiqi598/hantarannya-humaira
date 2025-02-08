@@ -43,7 +43,7 @@ const Theme: FC = () => {
             // ref={themeRef}
             key={theme.theme}
             className={cn(
-              "opacity-0 flex flex-col m-3 animate-fadeup"
+              "opacity-0 flex flex-col m-3 landscape:w-1/2 landscape:m-auto animate-fadeup"
             )}
           >
             <h3>{theme.theme}</h3>
@@ -62,10 +62,21 @@ const Theme: FC = () => {
           </div>
         ))}
       <Link
-        className="fixed bottom-[5rem] right-5 z-50 opacity-0 animate-fadeup animation-delay-800 px-3 py-2 rounded-full bg-pink-300 font-bold"
+        className="fixed bottom-[5rem] right-7 z-50 opacity-0 animate-fadeleft animation-delay-800"
         href="/gallery"
       >
-        <i className="fa-solid fa-user fa-xl"></i>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="36px"
+          viewBox="0 -960 960 960"
+          width="36px"
+          fill="#212121"
+          className="bg-pink-300 rounded-full pl-1.5 py-2 shadow-2xl"
+          stroke="#212121"
+          strokeWidth="32"
+        >
+          <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+        </svg>
       </Link>
     </>
   );

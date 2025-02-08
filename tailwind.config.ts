@@ -76,6 +76,7 @@ const config: Config = {
       },
       animation: {
         fadeup: "fadeup 1s ease forwards",
+        fadeleft: "fadeleft 1s ease forwards",
       },
       keyframes: {
         fadeup: {
@@ -85,6 +86,16 @@ const config: Config = {
           },
           "100%": {
             transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
+        fadeleft: {
+          "0%": {
+            transform: "translateX(3rem)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateX(0)",
             opacity: "1",
           },
         },
