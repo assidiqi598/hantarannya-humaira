@@ -5,20 +5,17 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ReactNode, useState } from "react";
 import cn from "classnames";
-import Button from "@/components/button";
+import { Button } from "@mui/material";
 import alt from "@/data/alt.json";
 
 interface IImgPage {
   isModal?: boolean;
 }
 
-export default function ImgPage({
-  isModal = false,
-}: IImgPage) {
+export default function ImgPage({ isModal = false }: IImgPage) {
   const params = useParams<{ id: string }>();
 
-  const [type, theme, img, desc, linkTarget, linkHref] =
-    decodeURI(params.id).split("_");
+  const [type, theme, img, desc, linkTarget, linkHref] = decodeURI(params.id).split("_");
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -29,20 +26,12 @@ export default function ImgPage({
       .replace(/c0L0n/g, ":");
   };
 
-  const descWithLink = (
-    desc: string,
-    target: string,
-    href: string
-  ): ReactNode => {
+  const descWithLink = (desc: string, target: string, href: string): ReactNode => {
     const splitted = desc.split(target);
     return (
       <span className="mt-2">
         {splitted[0]}
-        <Link
-          href={href}
-          target="_blank"
-          className="decoration-solid text-pink-600"
-        >
+        <Link href={href} target="_blank" className="decoration-solid text-pink-600">
           {target}
         </Link>
         {splitted[1]}
@@ -64,13 +53,10 @@ export default function ImgPage({
       )}
     >
       <div
-        className={cn(
-          "relative flex items-center opacity-0 animate-fadeup",
-          {
-            "animation-delay-400": !isModal,
-            "animation-delay-1200": isModal,
-          }
-        )}
+        className={cn("relative flex items-center opacity-0 animate-fadeup", {
+          "animation-delay-400": !isModal,
+          "animation-delay-1200": isModal,
+        })}
       >
         {loading && (
           <Image
@@ -101,33 +87,20 @@ export default function ImgPage({
             }
           )}
         >
-          <p className="portrait:mt-2 lg:text-xl">
-            Tipe: {type}
-          </p>
-          <p className="portrait:mt-2 lg:text-xl mt-6">
-            Tema: {theme}
-          </p>
+          <p className="portrait:mt-2 lg:text-xl">Tipe: {type}</p>
+          <p className="portrait:mt-2 lg:text-xl mt-6">Tema: {theme}</p>
           {desc && desc !== "undefined" && (
             <>
               {linkTarget && linkHref ? (
-                descWithLink(
-                  replace(desc),
-                  replace(linkTarget),
-                  replace(linkHref)
-                )
+                descWithLink(replace(desc), replace(linkTarget), replace(linkHref))
               ) : (
-                <span className="portrait:mt-2 mt-6 lg:text-lg">
-                  {replace(desc)}
-                </span>
+                <span className="portrait:mt-2 mt-6 lg:text-lg">{replace(desc)}</span>
               )}
             </>
           )}
           {!isModal && (
-            <Link
-              href={`/gallery/${encodeURIComponent(type)}`}
-              className="inline-block mt-6"
-            >
-              <Button id="back-to-gallery">
+            <Link href={`/gallery/${encodeURIComponent(type)}`} className="inline-block mt-6">
+              <Button id="back-to-gallery" variant="contained">
                 Back
               </Button>
             </Link>

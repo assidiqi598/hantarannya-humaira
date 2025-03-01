@@ -8,6 +8,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [...Array.from({ length: 50 }, (_, i) => `animation-delay-${i * 100}`)],
   theme: {
     screens: {
       sm: "480px",
@@ -65,14 +66,14 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      screens: {
+        landscape: { raw: "(orientation: landscape)" }, // Enable landscape mode support
+      },
+      extend: {
+        opacity: ["hover"], // Ensure hover is allowed for opacity
+      },
       transitionDelay: {
-        "0": "0ms",
-        "400": "400ms",
-        "600": "600ms",
-        "800": "800ms",
-        "1200": "1200ms",
-        "1600": "1600ms",
-        "2000": "2000ms",
+        ...Object.fromEntries([...Array(50)].map((_, i) => [`${i * 100}`, `${i * 100}ms`])),
       },
       animation: {
         fadeup: "fadeup 1s ease forwards",
@@ -101,12 +102,13 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        "main-bg-horizontal":
-          "url('/assets/main-bg-horizontal.webp')",
+        "main-bg-horizontal": "url('/assets/main-bg-horizontal.webp')",
         "main-bg-vertical":
           "linear-gradient(to bottom,rgba(0,0,0,0),rgba(255,255,255,100)),url('/assets/main-bg-vertical.webp')",
-        "clouds":
+        clouds:
           "linear-gradient(to bottom,rgba(0,0,0,0),rgba(255,255,255,100)),url('/assets/clouds.webp')",
+        "hidden-box": "url('/gallery/IMG_2476_crop.webp')",
+        "crystal-tray": "url('/gallery/IMG_2579_crop.webp')",
       },
     },
   },
@@ -119,12 +121,13 @@ const config: Config = {
         {
           "animation-delay": (value: any) => {
             return {
-              "animation-delay": value,
+              animationDelay: value,
             };
           },
         },
         {
           values: theme("transitionDelay"),
+          type: "any",
         }
       );
     }),

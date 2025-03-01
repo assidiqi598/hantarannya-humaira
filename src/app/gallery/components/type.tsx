@@ -5,36 +5,24 @@ import IType from "@/interfaces/types";
 import Theme from "./theme";
 import alt from "@/data/alt.json";
 import Link from "next/link";
+import { Stack, Typography } from "@mui/material";
 
-const Type: FC<
-  IType & { fullUrl?: string; idx: number }
-> = ({ type, idx, themes, fullUrl }) => {
+const Type: FC<IType & { fullUrl?: string; idx: number }> = ({ type, idx, themes, fullUrl }) => {
   return (
     <Link
       className={cn(
-        "flex flex-col opacity-0 w-fit h-fit m-4 rounded-xl border px-10 pb-6 animate-fadeup",
+        "flex justify-center items-center bg-cover opacity-0 animate-fadeleft h-[50svh] w-[100svw] landscape:w-[50svw] landscape:h-[100svh] overflow-hidden",
         {
-          "bg-pink-600 border-pink-300":
-            type === "Hidden Box",
-          "bg-pink-300 border-pink-600":
-            type === "Crystal Tray",
-          "text-white": type === "Hidden Box",
+          "bg-hidden-box": type === "Hidden Box",
+          "bg-crystal-tray": type === "Crystal Tray",
           [`animation-delay-${idx * 800}`]: idx > 0,
         }
       )}
       href={`${fullUrl}/${encodeURIComponent(type)}`}
     >
-      <div className="flex justify-between items-center">
-        <h2>{type}</h2>
-      </div>
-
-      <Image
-        className="rounded-xl"
-        src={`/gallery/IMG_${themes[0].images[0].image}.webp`}
-        alt={`${alt.mainAlt}-${type}`}
-        width={200}
-        height={200}
-      />
+      <Typography variant="h4" fontWeight="bold" className="text-white relative z-10">
+        {type}
+      </Typography>
     </Link>
   );
 };

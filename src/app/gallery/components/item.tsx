@@ -13,23 +13,15 @@ interface IItem extends IImages {
   theme: string;
 }
 
-const Item: FC<IItem> = ({
-  type,
-  theme,
-  image,
-  desc,
-  link,
-}) => {
-  const [isVisible, setIsVisible] =
-    useState<boolean>(false);
+const Item: FC<IItem> = ({ type, theme, image, desc, link }) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   // const [loading, setLoading] = useState<boolean>(true);
   const linkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting)
-          setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) setIsVisible(entry.isIntersecting);
       });
     });
 
@@ -45,14 +37,7 @@ const Item: FC<IItem> = ({
   return (
     <Link
       ref={linkRef}
-      href={`/gallery/img/${customEncodeURI(
-        type,
-        theme,
-        image,
-        desc,
-        link?.target,
-        link?.href
-      )}`}
+      href={`/gallery/img/${customEncodeURI(type, theme, image, desc, link?.target, link?.href)}`}
       scroll={false}
       className={cn(
         "w-1/4 md:w-1/5 lg:w-1/12 h-1/4 md:h-1/5 lg:h-1/12 mr-2 mb-2 rounded-lg border-2 border-pink-600",
@@ -73,13 +58,10 @@ const Item: FC<IItem> = ({
         />
       )} */}
       {/* with the use of onLoad, some images sometimes loaded but not showing up */}
-      <Image
+      <img
         src={`/gallery/IMG_${image}.webp`}
         alt={`${alt.mainAlt}-${image}`}
-        width={200}
-        height={200}
-        // onLoad={() => setLoading(false)}
-        // onLoadingComplete={() => setLoading(false)}
+        loading="lazy"
         className="w-full h-full rounded-lg"
       />
     </Link>

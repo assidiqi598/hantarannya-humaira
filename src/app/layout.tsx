@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import Header from "@/components/header";
+// import Header from "@/components/header";
 import WhatsApp from "@/components/whatsapp";
+import { ThemeProvider } from "@mui/material";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "Hantarannya Humaira",
@@ -18,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={"antialiased"}>
-        {/* <Header info="10% off until December 2024" /> */}
-        {children}
-        <WhatsApp />
+        <Providers>
+          {/* <Header info="10% off until December 2024" /> */}
+          {children}
+          <WhatsApp />
+        </Providers>
       </body>
     </html>
   );
