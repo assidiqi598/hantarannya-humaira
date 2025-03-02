@@ -27,7 +27,7 @@ const Theme: FC = () => {
               )}
             >
               <h3>{theme.theme}</h3>
-              <Masonry columns={{ xs: 2, sm: 3, md: 4, lg: 5 }} spacing={2}>
+              <Masonry columns={{ xs: 3, sm: 3, md: 4, lg: 5 }} spacing={1}>
                 {theme.images.map((image) => (
                   <Item
                     key={image.image}

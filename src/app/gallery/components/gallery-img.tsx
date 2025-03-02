@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ReactNode, useState } from "react";
 import cn from "classnames";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import alt from "@/data/alt.json";
 
 interface IImgPage {
@@ -75,7 +75,7 @@ export default function ImgPage({ isModal = false }: IImgPage) {
           height={500}
           priority={true}
           onLoad={onImgLoad}
-          className={"landscape:h-5/6 portrait:h-4/6 w-auto rounded-lg border-2 border-pink-600"}
+          className={"landscape:h-5/6 portrait:h-4/6 w-auto"}
         />
       </div>
       {!loading && (
@@ -99,11 +99,23 @@ export default function ImgPage({ isModal = false }: IImgPage) {
             </>
           )}
           {!isModal && (
-            <Link href={`/gallery/${encodeURIComponent(type)}`} className="inline-block mt-6">
-              <Button id="back-to-gallery" variant="contained">
-                Back
-              </Button>
-            </Link>
+            <Stack
+              direction="row"
+              justifyContent="flex-start"
+              spacing={2}
+              sx={{ marginTop: "1rem" }}
+            >
+              <Link href={`/gallery/${encodeURIComponent(type)}`} className="inline-block mt-6">
+                <Button id="back-to-gallery" color="secondary" variant="contained">
+                  Back
+                </Button>
+              </Link>
+              <Link href={`/book?type=${encodeURIComponent(type)}`} className="inline-block mt-6">
+                <Button id="select-type-to-book" variant="contained">
+                  Book this
+                </Button>
+              </Link>
+            </Stack>
           )}
         </div>
       )}

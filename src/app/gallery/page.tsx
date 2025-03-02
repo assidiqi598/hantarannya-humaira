@@ -13,7 +13,6 @@ const Gallery: FC = () => {
   const fullUrl = `${protocol}://${host}${pathname}`;
 
   return (
-    // <div className="landscape:min-h-svh overflow-hidden flex portrait:flex-col justify-start landscape:justify-center items-center m-3 lg:m-8 animate-fadeup">
     <Stack
       direction={{ lg: "row" }}
       alignItems="center"
@@ -31,7 +30,6 @@ const Gallery: FC = () => {
         />
       ))}
     </Stack>
-    // </div>
   );
 };
 
