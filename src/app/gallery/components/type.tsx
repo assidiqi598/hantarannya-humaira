@@ -1,6 +1,6 @@
 import { FC } from "react";
 import cn from "classnames";
-import IType from "@/interfaces/types";
+import IType from "@/lib/interfaces/types";
 import Link from "next/link";
 import { Typography } from "@mui/material";
 

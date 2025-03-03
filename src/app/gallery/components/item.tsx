@@ -4,7 +4,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import cn from "classnames";
-import IImages from "@/interfaces/images";
+import IImages from "@/lib/interfaces/images";
 import alt from "@/data/alt.json";
 import { customEncodeURI } from "@/util/encode";
 

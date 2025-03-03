@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import Link from "next/link";
-import IImages from "@/interfaces/images";
+import IImages from "@/lib/interfaces/images";
 import alt from "@/data/alt.json";
 import { customEncodeURI } from "@/util/encode";
 

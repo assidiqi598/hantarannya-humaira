@@ -1,13 +1,21 @@
 "use client";
 
-import { useState, useEffect, ChangeEvent } from "react";
-import { Button, TextField } from "@mui/material";
-import types from "@/data/types.json";
-import DateInput from "@/components/input/date";
-import Select from "@/components/select";
+import { useState, useEffect, ChangeEvent, ReactNode } from "react";
+import { Button, Divider, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import Link from "next/link";
-import ITheme from "@/interfaces/theme";
-import IType from "@/interfaces/types";
+import ITheme from "@/lib/interfaces/theme";
+import IType from "@/lib/interfaces/types";
+import { z } from "zod";
+import { bookingSchema } from "@/lib/schemas/booking.schema";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CrystalTheme } from "@/lib/enums/theme-crystal.enum";
+import { HiddenTheme } from "@/lib/enums/theme-hidden.enum";
+import { Type } from "@/lib/enums/type.enum";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+type BookingFormValues = z.infer<typeof bookingSchema>;
 
 export default function MainChoosing() {
   const [type, setType] = useState<IType>();
@@ -21,6 +29,8 @@ export default function MainChoosing() {
     return new Date(currentDate.setDate(currentDate.getDate() + 14));
   });
   const [additionalReq, setAdditionalReq] = useState<string>("");
+
+  const [types, setTypes] = useState<IType[]>([]);
 
   useEffect(() => {
     if (type && theme && name && bookingDate) {
@@ -45,71 +55,122 @@ ${additionalReq}`);
     setUrlEncodedMsg(encodeURI(message));
   }, [message]);
 
-  return (
-    <div id="main-choosing" className="flex items-start justify-center min-h-svh p-4">
-      <TextField
-        required
-        id="requester-name"
-        value={name}
-        onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
-          setName(e.target.value)
-        }
-        variant="filled"
-        label="Your name"
-      />
-      {type && !name && <span className="ml-2 font-bold text-yellow-200">required!</span>}
-      <div className="mt-5 opacity-0 animate-fadeup animation-delay-800">
-        <h3 className="text-white">Booking untuk tanggal:</h3>
-        <DateInput
-          id="booking-date"
-          value={bookingDate}
-          onChange={(value: string) => {
-            setBookingDate(new Date(value));
-          }}
-        />
-      </div>
-      <div className="mt-5 opacity-0 animate-fadeup animation-delay-1200">
-        <h3 className="text-white">Pilih tipe hantaran</h3>
-        <div className="flex items-center justify-start w-full">
-          <Select
-            items={types}
-            propKey="type"
-            value={type?.type}
-            onChange={(value) => {
-              const typeIdx = types.findIndex((it) => it.type === value);
-              setType(types[typeIdx]);
-              setTotalBox(types[typeIdx].maxTotal);
-              setTheme(undefined);
-            }}
-          />
-        </div>
-      </div>
-      {type && name && (
-        <div className="mt-5 animate-fadeup">
-          <h3 className="text-white">Pilih tema hantaran</h3>
-          <div className="flex items-center justify-start w-full">
-            <Select
-              items={type.themes}
-              propKey="theme"
-              value={theme?.theme}
-              onChange={(value) => {
-                const themeIdx = type.themes.findIndex((it) => it.theme === value);
-                setTheme(type.themes[themeIdx]);
-                setTimeout(() => {
-                  window.scroll({
-                    top: 200,
-                    left: 0,
-                    behavior: "smooth",
-                  });
-                }, 400);
-              }}
-            />
-          </div>
-        </div>
-      )}
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<BookingFormValues>({
+    resolver: zodResolver(bookingSchema),
+    defaultValues: {
+      name: "",
+      bookingDate: "",
+      totalBox: 7,
+    },
+  });
 
-      {type && theme && name && isNaN(bookingDate?.getTime()) === false && (
-        <>
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <form id="main-choosing">
+        <Stack
+          alignItems="center"
+          justifyContent="center"
+          spacing={{ xs: 2, lg: 3 }}
+          className="bg-white rounded-lg shadow-xl p-5"
+        >
+          <Typography variant="h4" fontWeight="bold" align="left" className="w-full">
+            Booking Form
+          </Typography>
+          <Divider component="div" className="w-full border-2 border-pink-300" />
+          <TextField
+            required
+            id="requester-name"
+            {...register("name")}
+            variant="outlined"
+            label="Your name"
+            fullWidth
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
+          <Stack
+            direction={{ xs: "column", lg: "row" }}
+            spacing={2}
+            className="w-full"
+            justifyContent="space-between"
+          >
+            <Stack direction="row" spacing={2} justifyContent="space-between" className="lg:w-full">
+              <Controller
+                name="bookingDate"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    {...field}
+                    value={field.value || null}
+                    onChange={(newValue) => field.onChange(newValue)}
+                    label="Booking date"
+                    slotProps={{
+                      textField: {
+                        helperText: errors.bookingDate?.message,
+                        error: !!errors.bookingDate,
+                      },
+                    }}
+                    className="lg:w-1/3"
+                  />
+                )}
+              ></Controller>
+
+              <Select
+                {...register("type")}
+                required
+                displayEmpty
+                error={!!errors.theme}
+                renderValue={(selected): ReactNode => {
+                  if (!selected) {
+                    return <span style={{ color: "#aaa" }}>Choose your type</span>;
+                  }
+                  return <span>{`${selected}`}</span>;
+                }}
+                className="lg:w-1/3"
+                defaultValue=""
+              >
+                {Object.values(Type).map((it) => (
+                  <MenuItem key={it} value={it}>
+                    {it}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Stack>
+
+            <Select
+              {...register("theme")}
+              required
+              displayEmpty
+              error={!!errors.theme}
+              renderValue={(selected): ReactNode => {
+                if (!selected) {
+                  return <span style={{ color: "#aaa" }}>Choose your theme</span>;
+                }
+                return <span>{`${selected}`}</span>;
+              }}
+              className="lg:w-1/3"
+              defaultValue=""
+            >
+              {watch("type") === "Crystal Tray" &&
+                Object.values(CrystalTheme).map((it) => (
+                  <MenuItem key={it} value={it}>
+                    {it}
+                  </MenuItem>
+                ))}
+              {watch("type") === "Hidden Box" &&
+                Object.values(HiddenTheme).map((it) => (
+                  <MenuItem key={it} value={it}>
+                    {it}
+                  </MenuItem>
+                ))}
+            </Select>
+          </Stack>
+
           <div className="mt-5 opacity-0 animate-fadeup">
             <h3 className="text-white">Total hantaran</h3>
             <div className="flex items-center justify-center rounded-lg bg-white w-fit">
@@ -202,8 +263,8 @@ ${additionalReq}`);
               </svg>
             </Button>
           </Link>
-        </>
-      )}
-    </div>
+        </Stack>
+      </form>
+    </LocalizationProvider>
   );
 }

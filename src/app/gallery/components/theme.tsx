@@ -1,6 +1,6 @@
 "use client";
 
-import ITheme from "@/interfaces/theme";
+import ITheme from "@/lib/interfaces/theme";
 import { FC, useEffect, useRef, useState } from "react";
 import cn from "classnames";
 import Item from "./item";
