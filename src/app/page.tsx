@@ -1,4 +1,4 @@
-import Button from "@/components/button";
+import { Button } from "@mui/material";
 import Link from "next/link";
 import styles from "./app.module.css";
 import Image from "next/image";
@@ -16,21 +16,13 @@ export default function Home() {
         className="w-2/3 md:w-5/12 lg:w-1/5 mt-[5rem] opacity-0 animate-fadeup"
       />
       <div className="flex flex-col items-center justify-end p-3 w-full lg:w-1/2 lg:px-0 opacity-0 animate-fadeup animation-delay-600">
-        <h1
-          className={`${styles["main-intro-title"]} text-4xl lg:text-5xl text-center`}
-        >
+        <h1 className={`${styles["main-intro-title"]} text-4xl lg:text-5xl text-center`}>
           &ldquo;Hantaran&rdquo; specially made for you
         </h1>
-        <p className="text-pink-600 my-5">
-          by HANTARANNYA HUMAIRA
-        </p>
+        <p className="text-pink-600 my-5">by HANTARANNYA HUMAIRA</p>
         <div className="flex flex-col items-center justify-center">
           <Link href="/book">
-            <Button
-              id="main-intro-go-to-choosing-btn"
-              bgColor="bg-pink-600"
-              width="w-[9.13rem]"
-            >
+            <Button id="main-intro-go-to-choosing-btn">
               Book now{" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,14 +41,6 @@ export default function Home() {
           <Link href="/gallery">
             <Button
               id="main-intro-go-to-gallery-btn"
-              bgColor="bg-pink-200"
-              textColor="text-black-400"
-              width="w-[9.13rem]"
-              additionalClassNames={[
-                "mt-2",
-                "border-pink-600",
-                "border",
-              ]}
             >
               See gallery{" "}
               <svg

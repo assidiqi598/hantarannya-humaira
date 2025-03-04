@@ -3,15 +3,15 @@
 import { type ElementRef, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
-import Button from "@/components/button";
+import { Button, Stack } from "@mui/material";
+import { usePathname } from "next/navigation";
 
-export function Modal({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
+  const [type, theme] = decodeURIComponent(usePathname().split("/").filter(Boolean).pop()!).split(
+    "_"
+  );
 
   useEffect(() => {
     if (!dialogRef.current?.open) {
@@ -24,11 +24,15 @@ export function Modal({
   }
 
   return createPortal(
-    <div className="absolute min-h-[50%] min-w-[20%] top-0 right-0 bottom-0 left-0 bg-black-400/50">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      onClick={onDismiss}
+    >
       <dialog
         ref={dialogRef}
-        className="relative rounded-lg"
+        className="rounded-lg"
         onClose={onDismiss}
+        onClick={(e) => e.stopPropagation()}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,20 +47,27 @@ export function Modal({
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
         </svg>
         {children}
-        <Button
-          id="modal-close-btn"
-          onClick={onDismiss}
-          additionalClassNames={[
-            "landscape:hidden",
-            "my-2",
-            "mx-auto",
-            "opacity-0",
-            "portrait:animate-fadeup",
-            "animation-delay-1200",
-          ]}
-        >
-          Close
-        </Button>
+        <Stack direction="row" spacing={2} justifyContent="center" sx={{ margin: ".5rem" }}>
+          <Button
+            id="modal-close-btn"
+            className="landscape:hidden"
+            variant="contained"
+            onClick={onDismiss}
+            color="secondary"
+          >
+            Close
+          </Button>
+          <Button
+            id="modal-book-btn"
+            className="landscape:hidden"
+            variant="contained"
+            onClick={() => {
+              router.push(`/book?type=${type}&theme=${theme}`);
+            }}
+          >
+            Book this
+          </Button>
+        </Stack>
       </dialog>
     </div>,
     document.getElementById("gallery-img")!

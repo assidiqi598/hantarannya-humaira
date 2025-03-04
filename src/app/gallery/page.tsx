@@ -1,18 +1,36 @@
 import types from "@/data/types.json";
 import Type from "./components/type";
+import { FC } from "react";
+import { cookies, headers } from "next/headers";
+import { Stack } from "@mui/material";
 
-export default function Gallery() {
+const Gallery: FC = async () => {
+  const headersList = await headers();
+  const host = headersList.get("host");
+  const protocol = headersList.get("x-forwarded-proto") || "http";
+  const pathname = (await cookies()).get("currentPath")?.value || "/";
+
+  const fullUrl = `${protocol}://${host}${pathname}`;
+
   return (
-    <div className="overflow-hidden mt-6 m-3 lg:m-8 animate-fadeup">
-      <h1>Gallery</h1>
-      {types.map((type) => (
+    <Stack
+      direction={{ lg: "row" }}
+      alignItems="center"
+      justifyContent="center"
+      className="min-h-svh min-w-svw overflow-hidden"
+    >
+      {types.map((type, idx) => (
         <Type
           key={type.type}
+          idx={idx}
           type={type.type}
           themes={type.themes}
           maxTotal={type.maxTotal}
+          fullUrl={fullUrl}
         />
       ))}
-    </div>
+    </Stack>
   );
-}
+};
+
+export default Gallery;

@@ -1,52 +1,27 @@
-"use client";
-
-import { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import cn from "classnames";
-import IType from "@/interfaces/types";
-import Theme from "./theme";
+import IType from "@/lib/interfaces/types";
+import Link from "next/link";
+import { Typography } from "@mui/material";
 
-const Type: FC<IType> = ({ type, themes }) => {
-  const [isVisible, setIsVisible] =
-    useState<boolean>(false);
-  const typeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting)
-          setIsVisible(entry.isIntersecting);
-      });
-    });
-
-    const ref = typeRef.current;
-
-    observer.observe(ref as Element);
-
-    return () => {
-      if (ref) observer.unobserve(ref as Element);
-    };
-  }, []);
-
+const Type: FC<IType & { fullUrl?: string; idx: number }> = ({ type, idx, fullUrl }) => {
   return (
-    <div
-      ref={typeRef}
+    <Link
       className={cn(
-        "flex flex-col opacity-0 w-fit h-fit mb-8",
+        "relative flex justify-center items-center bg-cover opacity-0 animate-fadeleft h-[50svh] w-[100svw] landscape:w-[50svw] landscape:h-[100svh] overflow-hidden",
         {
-          "animate-fadeup": isVisible,
+          "bg-hidden-box": type === "Hidden Box",
+          "bg-crystal-tray": type === "Crystal Tray",
+          [`animation-delay-${idx * 800}`]: idx > 0,
         }
       )}
+      href={`${fullUrl}/${encodeURIComponent(type)}`}
     >
-      <h2>Tipe: {type}</h2>
-      {themes.map((theme) => (
-        <Theme
-          key={theme.theme}
-          type={type}
-          theme={theme.theme}
-          images={theme.images}
-        />
-      ))}
-    </div>
+      <div className="absolute inset-0 transition-all duration-300 hover:backdrop-brightness-50"></div>
+      <Typography variant="h4" fontWeight="bold" className="text-white relative z-10">
+        {type}
+      </Typography>
+    </Link>
   );
 };
 
