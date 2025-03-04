@@ -3,7 +3,6 @@ import "./globals.css";
 
 // import Header from "@/components/header";
 import WhatsApp from "@/components/whatsapp";
-import { ThemeProvider } from "@mui/material";
 import Providers from "./providers";
 
 export const metadata: Metadata = {

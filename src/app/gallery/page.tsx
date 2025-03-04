@@ -4,11 +4,11 @@ import { FC } from "react";
 import { cookies, headers } from "next/headers";
 import { Stack } from "@mui/material";
 
-const Gallery: FC = () => {
-  const headersList = headers();
+const Gallery: FC = async () => {
+  const headersList = await headers();
   const host = headersList.get("host");
   const protocol = headersList.get("x-forwarded-proto") || "http";
-  const pathname = cookies().get("currentPath")?.value || "/";
+  const pathname = (await cookies()).get("currentPath")?.value || "/";
 
   const fullUrl = `${protocol}://${host}${pathname}`;
 

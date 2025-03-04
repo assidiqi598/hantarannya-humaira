@@ -3,11 +3,12 @@ import types from "@/data/types.json";
 import cn from "classnames";
 import Item from "./components/item";
 import { cookies } from "next/headers";
-import Link from "next/link";
 import { Masonry } from "@mui/lab";
+import { SpeedDialAction, SpeedDial, SpeedDialIcon } from "@mui/material";
+import { CardGiftcard, ChevronLeft, ExpandLess, ExpandMore } from "@mui/icons-material";
 
-const Theme: FC = () => {
-  const pathname = cookies().get("currentPath")?.value;
+const Theme: FC = async () => {
+  const pathname = (await cookies()).get("currentPath")?.value;
 
   let type = pathname?.split("/").filter(Boolean).pop();
 
@@ -41,23 +42,30 @@ const Theme: FC = () => {
               </Masonry>
             </div>
           ))}
-      <Link
-        className="fixed bottom-[5rem] right-7 z-50 opacity-0 animate-fadeleft animation-delay-800 rounded-full shadow-xl"
-        href="/gallery"
+      <SpeedDial
+        ariaLabel="gallery-menu"
+        className="fixed bottom-[5rem] right-4 z-50 opacity-0 animate-fadeleft animation-delay-800"
+        icon={<SpeedDialIcon icon={<ExpandLess />} openIcon={<ExpandMore />} />}
+        direction="up"
+        FabProps={{ size: "medium" }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="36px"
-          viewBox="0 -960 960 960"
-          width="36px"
-          fill="#ffffff"
-          className="bg-pink-600 rounded-full pl-1.5 py-2 shadow-2xl"
-          stroke="#ffffff"
-          strokeWidth="32"
-        >
-          <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
-        </svg>
-      </Link>
+        <SpeedDialAction
+          icon={<ChevronLeft />}
+          slotProps={{ tooltip: { title: "Back", open: true }, fab: { href: "/gallery" } }}
+        />
+        {types
+          ?.filter((it) => it.type !== type)
+          ?.map((it) => (
+            <SpeedDialAction
+              key={it.type}
+              icon={<CardGiftcard />}
+              slotProps={{
+                tooltip: { title: it.type, open: true },
+                fab: { href: `/gallery/${it.type}` },
+              }}
+            />
+          ))}
+      </SpeedDial>
     </>
   );
 };

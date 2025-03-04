@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 
 interface IHeader {
@@ -11,7 +12,7 @@ const Header: FC<IHeader> = ({ info }) => {
       id="header"
       className="bg-pink-600 fixed left-0 top-0 min-h-10 w-screen flex justify-start items-center z-50"
     >
-      <a href="/">
+      <Link href="/">
         <Image
           src="/assets/logo.png"
           alt="hantaran seserahan hantarannya humaira"
@@ -20,13 +21,9 @@ const Header: FC<IHeader> = ({ info }) => {
           height={512}
           priority={true}
         />
-      </a>
+      </Link>
 
-      {info && (
-        <p className="p-0 m-1 text-center text-white w-full">
-          {info}
-        </p>
-      )}
+      {info && <p className="p-0 m-1 text-center text-white w-full">{info}</p>}
     </div>
   );
 };

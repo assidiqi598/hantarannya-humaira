@@ -4,10 +4,14 @@ import { type ElementRef, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
 import { Button, Stack } from "@mui/material";
+import { usePathname } from "next/navigation";
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
+  const [type, theme] = decodeURIComponent(usePathname().split("/").filter(Boolean).pop()!).split(
+    "_"
+  );
 
   useEffect(() => {
     if (!dialogRef.current?.open) {
@@ -49,8 +53,19 @@ export function Modal({ children }: { children: React.ReactNode }) {
             className="landscape:hidden"
             variant="contained"
             onClick={onDismiss}
+            color="secondary"
           >
             Close
+          </Button>
+          <Button
+            id="modal-book-btn"
+            className="landscape:hidden"
+            variant="contained"
+            onClick={() => {
+              router.push(`/book?type=${type}&theme=${theme}`);
+            }}
+          >
+            Book this
           </Button>
         </Stack>
       </dialog>

@@ -2,12 +2,7 @@ import { CrystalTheme } from "../enums/theme-crystal.enum";
 import { HiddenTheme } from "../enums/theme-hidden.enum";
 import { Type } from "../enums/type.enum";
 
-const mergedThemes = {
-  ...CrystalTheme,
-  ...HiddenTheme,
-} as const;
-
-type MergedThemes = (typeof mergedThemes)[keyof typeof mergedThemes];
+type MergedThemes = CrystalTheme[keyof CrystalTheme] | HiddenTheme[keyof HiddenTheme];
 
 export type Booking = {
   name: string;
@@ -15,5 +10,5 @@ export type Booking = {
   type: Type;
   theme: MergedThemes;
   totalBox: number;
-  requestHantaran?: string;
+  additionalRequest?: string;
 };

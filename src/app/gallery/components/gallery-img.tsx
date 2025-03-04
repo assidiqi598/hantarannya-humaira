@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import cn from "classnames";
 import { Button, Stack } from "@mui/material";
@@ -14,6 +14,7 @@ interface IImgPage {
 
 export default function ImgPage({ isModal = false }: IImgPage) {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
 
   const [type, theme, img, desc, linkTarget, linkHref] = decodeURI(params.id).split("_");
 
@@ -98,25 +99,25 @@ export default function ImgPage({ isModal = false }: IImgPage) {
               )}
             </>
           )}
-          {!isModal && (
-            <Stack
-              direction="row"
-              justifyContent="flex-start"
-              spacing={2}
-              sx={{ marginTop: "1rem" }}
+          <Stack direction="row" justifyContent="flex-start" spacing={2} sx={{ marginTop: "2rem" }}>
+            {!isModal && (
+              <Button
+                id="back-to-gallery"
+                color="secondary"
+                variant="contained"
+                onClick={() => router.push(`/gallery/${encodeURIComponent(type)}`)}
+              >
+                Back
+              </Button>
+            )}
+            <Button
+              id="select-type-to-book"
+              variant="contained"
+              onClick={() => router.push(`/book?type=${type}&theme=${theme}`)}
             >
-              <Link href={`/gallery/${encodeURIComponent(type)}`} className="inline-block mt-6">
-                <Button id="back-to-gallery" color="secondary" variant="contained">
-                  Back
-                </Button>
-              </Link>
-              <Link href={`/book?type=${encodeURIComponent(type)}`} className="inline-block mt-6">
-                <Button id="select-type-to-book" variant="contained">
-                  Book this
-                </Button>
-              </Link>
-            </Stack>
-          )}
+              Book this
+            </Button>
+          </Stack>
         </div>
       )}
     </div>

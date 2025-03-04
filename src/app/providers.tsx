@@ -1,6 +1,6 @@
-"use client"; // ✅ Mark this component as Client Component
+"use client";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ReactNode } from "react";
 import theme from "@/theme";

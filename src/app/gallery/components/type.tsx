@@ -4,7 +4,7 @@ import IType from "@/lib/interfaces/types";
 import Link from "next/link";
 import { Typography } from "@mui/material";
 
-const Type: FC<IType & { fullUrl?: string; idx: number }> = ({ type, idx, themes, fullUrl }) => {
+const Type: FC<IType & { fullUrl?: string; idx: number }> = ({ type, idx, fullUrl }) => {
   return (
     <Link
       className={cn(
