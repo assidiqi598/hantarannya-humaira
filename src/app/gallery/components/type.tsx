@@ -4,7 +4,7 @@ import IType from "@/lib/interfaces/types";
 import Link from "next/link";
 import { Typography } from "@mui/material";
 
-const Type: FC<IType & { fullUrl?: string; idx: number }> = ({ type, idx, fullUrl }) => {
+const Type: FC<IType & { idx: number }> = ({ type, idx }) => {
   return (
     <Link
       className={cn(
@@ -15,7 +15,7 @@ const Type: FC<IType & { fullUrl?: string; idx: number }> = ({ type, idx, fullUr
           [`animation-delay-${idx * 800}`]: idx > 0,
         }
       )}
-      href={`${fullUrl}/${encodeURIComponent(type)}`}
+      href={`gallery/${encodeURIComponent(type)}`}
     >
       <div className="absolute inset-0 transition-all duration-300 hover:backdrop-brightness-50"></div>
       <Typography variant="h4" fontWeight="bold" className="text-white relative z-10">

@@ -1,16 +1,9 @@
 import types from "@/data/types.json";
 import Type from "./components/type";
 import { FC } from "react";
-import { cookies, headers } from "next/headers";
 import { Stack } from "@mui/material";
 
 const Gallery: FC = async () => {
-  const headersList = await headers();
-  const host = headersList.get("host");
-  const protocol = headersList.get("x-forwarded-proto") || "http";
-  const pathname = (await cookies()).get("currentPath")?.value || "/";
-
-  const fullUrl = `${protocol}://${host}${pathname}`;
 
   return (
     <Stack
@@ -26,7 +19,6 @@ const Gallery: FC = async () => {
           type={type.type}
           themes={type.themes}
           maxTotal={type.maxTotal}
-          fullUrl={fullUrl}
         />
       ))}
     </Stack>
