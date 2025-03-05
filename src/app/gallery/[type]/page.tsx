@@ -8,11 +8,14 @@ import { SpeedDialAction, SpeedDial, SpeedDialIcon } from "@mui/material";
 import { CardGiftcard, ChevronLeft, ExpandLess, ExpandMore } from "@mui/icons-material";
 
 const Theme: FC = async () => {
+  console.log("typeof window", typeof window);
   const pathname = (await cookies()).get("currentPath")?.value;
 
   let type = pathname?.split("/").filter(Boolean).pop();
 
   type = decodeURIComponent(type!);
+
+  console.log("type", type)
 
   return (
     <>

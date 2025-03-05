@@ -1,3 +1,5 @@
+"use client";
+
 import { Theme } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 

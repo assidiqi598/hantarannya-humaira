@@ -3,6 +3,7 @@ import "./globals.css";
 
 // import Header from "@/components/header";
 import WhatsApp from "@/components/whatsapp";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={"antialiased"}>
-        <Providers>
-          {/* <Header info="10% off until December 2024" /> */}
-          {children}
-          <WhatsApp />
-        </Providers>
+        <AppRouterCacheProvider>
+          <Providers>
+            {/* <Header info="10% off until December 2024" /> */}
+            {children}
+            <WhatsApp />
+          </Providers>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
